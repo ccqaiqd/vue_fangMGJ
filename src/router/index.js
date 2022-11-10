@@ -1,9 +1,16 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
 
+import Test from '@/views/test/Test.vue'
+
 Vue.use(VueRouter)
 
 const routes = [
+  {
+    path: '/',
+    name: '测试页',
+    component: Test
+  },
   
 ]
 
