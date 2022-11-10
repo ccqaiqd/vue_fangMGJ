@@ -1,6 +1,6 @@
 <template>
   <div>
-    test666哈哈哈
+    <p>test666哈哈哈</p>
   </div>
 </template>
 
@@ -16,4 +16,4 @@
 
 <style>
 
-</style>
+</style> 
