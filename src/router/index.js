@@ -5,6 +5,7 @@ const Home = () => import('@/views/home/Home')
 const Category = () => import('@/views/category/Category')
 const Cart = () => import('@/views/cart/Cart')
 const Profile = () => import('@/views/profile/Profile')
+const Test = () => import('@/views/test/Test')
 
 // 1.安装插件
 Vue.use(VueRouter)
@@ -13,7 +14,7 @@ Vue.use(VueRouter)
 const routes = [
   {
     path: '',
-    redirect: '/home'
+    redirect: '/test'
   },
   {
     path: '/home',
@@ -30,6 +31,11 @@ const routes = [
   {
     path: '/profile',
     component: Profile
+  },
+  // 测试页面路由
+  {
+    path: '/test',
+    component: Test
   }
 ]
 const router = new VueRouter({
