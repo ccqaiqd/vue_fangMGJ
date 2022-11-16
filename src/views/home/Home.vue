@@ -1,10 +1,15 @@
 <template>
   <div>
     <NavBar class="center"><div slot="center">购物街</div></NavBar>
-    <HomeSwiper :banners="banners" class="lunbo"></HomeSwiper>
+    <HomeSwiper
+      :banners="banners"
+      class="lunbo"></HomeSwiper>
     <RecommendView :recommends="recommends"></RecommendView>
     <FeatureView></FeatureView>
-    <TabControl class="tabControl" :titles="['流行','新款','精品']"></TabControl>
+    <TabControl
+      class="tabControl"
+      :titles="['流行', '新款', '精品']"></TabControl>
+    <GoodsList></GoodsList>
     <ul>
       <li>站位1</li>
       <li>站位2</li>
@@ -111,35 +116,55 @@
 </template>
 
 <script>
-import NavBar from '@/components/common/navbar/NavBar'
-import HomeSwiper from '@/views/home/childComps/HomeSwiper'
-import RecommendView from '@/views/home/childComps/RecommendView'
-import FeatureView from '@/views/home/childComps/FeatureView'
-import TabControl from '@/components/content/tabControl/TabControl'
-import {getHomeMultidata} from '@/network/home'
+  import NavBar from '@/components/common/navbar/NavBar'
+  import HomeSwiper from '@/views/home/childComps/HomeSwiper'
+  import RecommendView from '@/views/home/childComps/RecommendView'
+  import FeatureView from '@/views/home/childComps/FeatureView'
+  import TabControl from '@/components/content/tabControl/TabControl'
+  import GoodsList from '@/components/content/goods/GoodsList'
+  import { getHomeMultidata, getHomeGoods } from '@/network/home'
 
   export default {
-    name: "Home",
+    name: 'Home',
     data() {
       return {
         banners: [],
         recommends: [],
+        // 首页下拉商品数据模型设计
+        goods: {
+          pop: { page: 1, list: [] },
+          news: { page: 1, list: [] },
+          sell: { page: 1, list: [] },
+        },
       }
     },
-    components:{
+    components: {
       NavBar,
       HomeSwiper,
       RecommendView,
       FeatureView,
-      TabControl
+      TabControl,
+      GoodsList,
     },
     created() {
-      getHomeMultidata().then(res =>{
-        console.log('res~~~',res);
+      getHomeMultidata().then(res => {
+        console.log('res~~~', res)
         this.banners = res.data.banner.list
         this.recommends = res.data.recommend.list
       })
-    }
+      // 请求不同分页商品数据
+      this.getHomeGoods('pop')
+    },
+    methods: {
+      getHomeGoods(type) {
+        let page = this.goods[type].page
+        getHomeGoods(type, page).then(res => {
+          console.log('商品列表数据', res)
+          this.goods[type].list.push(...res)
+          this.goods[type].page += 1
+        })
+      },
+    },
   }
 </script>
 
@@ -151,12 +176,12 @@ import {getHomeMultidata} from '@/network/home'
     /* 阻止导航栏随着滚动而滚动 用 fixed 定位 */
     position: fixed;
     top: 0;
-    left:0;
-    right:0;
+    left: 0;
+    right: 0;
     z-index: 9;
   }
   .lunbo {
-    padding-top:44px
+    padding-top: 44px;
   }
   .tabControl {
     position: sticky;

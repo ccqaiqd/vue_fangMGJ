@@ -32,20 +32,20 @@
           class="icon_play"
           @click="playvideo"
           src="~@/assets/img/live/icon_play.png" />
+        <!-- 右侧头像、点赞、评论、转发 -->
+        <OnRightSideTheList class="onRightSideTheList"></OnRightSideTheList>
       </div>
     </nut-swiper>
   </div>
 </template>
 
 <script>
-  // 注意：这种方式将会导入所有组件
-  // import Vue from 'vue'
-  // import NutUI from '@nutui/nutui'
-  // import '@nutui/nutui/dist/nutui.css'
-
-  // NutUI.install(Vue)
+  import OnRightSideTheList from '@/views/test/onRightSideTheList/OnRightSideTheList'
   export default {
     name: 'VideoTest',
+    components: {
+      OnRightSideTheList,
+    },
     data() {
       let u = navigator.userAgent
       return {
@@ -225,5 +225,12 @@
     height: 100%;
     /* 引用定义好的常量 */
     background-color: var(--color-tint);
+  }
+  .onRightSideTheList {
+    position: absolute;
+    top: 50%;
+    margin-top: -100px;
+    right: 0;
+    z-index: 999;
   }
 </style>
