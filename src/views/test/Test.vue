@@ -153,9 +153,12 @@
           this.pauseVideo()
         } else {
           //安卓播放时重置显示封面。图标等
-          this.isVideoShow = true
-          this.iconPlayShow = true
+          // this.isVideoShow = true
+          // this.iconPlayShow = true
           // this.pauseVideo()
+          // 和 iOS 一样的效果
+          this.isVideoShow = false
+          this.pauseVideo()
         }
       },
       // 看不懂这个操作
@@ -220,6 +223,7 @@
   .maxBox {
     width: 100%;
     height: 100%;
-    background-color: skyblue;
+    /* 引用定义好的常量 */
+    background-color: var(--color-tint);
   }
 </style>
