@@ -12,35 +12,36 @@ Vue.use(VueRouter)
 
 // 2.创建路由对象
 const routes = [
+  // 路由重定向
   {
     path: '',
-    redirect: '/test'
+    redirect: '/home',
   },
   {
     path: '/home',
-    component: Home
+    component: Home,
   },
   {
     path: '/category',
-    component: Category
+    component: Category,
   },
   {
     path: '/cart',
-    component: Cart
+    component: Cart,
   },
   {
     path: '/profile',
-    component: Profile
+    component: Profile,
   },
   // 测试页面路由
   {
     path: '/test',
-    component: Test
-  }
+    component: Test,
+  },
 ]
 const router = new VueRouter({
   routes,
-  mode: 'history'
+  mode: 'history',
 })
 
 // 3.导出router
