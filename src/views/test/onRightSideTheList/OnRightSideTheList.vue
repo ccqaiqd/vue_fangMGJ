@@ -26,22 +26,38 @@
         alt="" />
       <slot name="comments">评论</slot>
     </div>
-    <div class="onRightSideTheListItem">
+    <div
+      class="onRightSideTheListItem"
+      @click="inputbox">
       <img
         src="@/assets/img/live/share.svg"
         alt="" />
       <slot name="comments">分享</slot>
     </div>
+    <nut-popup
+      class="popupSty"
+      v-model="isShow"
+      position="bottom"
+      get-container="#mountRelyOn"
+      :style="{ height: '20%' }">
+      <ShareToExternalAPP> </ShareToExternalAPP>
+    </nut-popup>
   </div>
 </template>
 
 <script>
+  import ShareToExternalAPP from '@/components/common/shareToExternalAPP/ShareToExternalAPP'
   export default {
     name: 'OnRightSideTheList',
+    components: {
+      ShareToExternalAPP,
+    },
     data() {
       return {
         isLoveFlag: true,
-        loveNum: 666,
+        loveNum: 554,
+        // 分享底部弹出
+        isShow: false,
       }
     },
     methods: {
@@ -52,6 +68,10 @@
         } else {
           this.loveNum -= 1
         }
+      },
+      // 弹出底部分享对话框
+      inputbox() {
+        this.isShow = !this.isShow
       },
     },
   }
@@ -68,14 +88,21 @@
     z-index: 9999;
   }
   .onRightSideTheListItem {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
     padding-top: 20px;
     flex: 1;
     color: white;
+    vertical-align: middle;
   }
   .onRightSideTheListItem img {
     margin-bottom: 3px;
     display: block;
     width: 30px;
     height: 30px;
+  }
+  .popupSty {
+    z-index: 99999;
   }
 </style>

@@ -1,5 +1,7 @@
 <template>
-  <div class="maxBox">
+  <div
+    class="maxBox"
+    id="mountRelyOn">
     <!-- 测试页 -->
     <nut-swiper
       direction="vertical"
