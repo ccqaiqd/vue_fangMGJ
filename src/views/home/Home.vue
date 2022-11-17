@@ -9,7 +9,7 @@
     <TabControl
       class="tabControl"
       :titles="['流行', '新款', '精品']"></TabControl>
-    <GoodsList></GoodsList>
+    <GoodsList :goods="goods.pop"></GoodsList>
     <ul>
       <li>站位1</li>
       <li>站位2</li>
@@ -133,7 +133,7 @@
         // 首页下拉商品数据模型设计
         goods: {
           pop: { page: 1, list: [] },
-          news: { page: 1, list: [] },
+          new: { page: 1, list: [] },
           sell: { page: 1, list: [] },
         },
       }
@@ -154,13 +154,15 @@
       })
       // 请求不同分页商品数据
       this.getHomeGoods('pop')
+      this.getHomeGoods('new')
+      this.getHomeGoods('sell')
     },
     methods: {
       getHomeGoods(type) {
         let page = this.goods[type].page
         getHomeGoods(type, page).then(res => {
-          console.log('商品列表数据', res)
-          this.goods[type].list.push(...res)
+          console.log(`商品列表数据${type}`, res.data)
+          this.goods[type].list.push(...res.data.list)
           this.goods[type].page += 1
         })
       },
