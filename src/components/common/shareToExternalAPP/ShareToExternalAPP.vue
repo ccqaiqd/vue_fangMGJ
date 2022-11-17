@@ -39,8 +39,12 @@
 </template>
 
 <script>
+  // 测试一次push多次的commit
   export default {
     name: 'ShareToExternalAPP',
+    data() {
+      return {}
+    },
   }
 </script>
 
