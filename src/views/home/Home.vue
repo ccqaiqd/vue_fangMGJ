@@ -8,8 +8,9 @@
     <FeatureView></FeatureView>
     <TabControl
       class="tabControl"
-      :titles="['流行', '新款', '精品']"></TabControl>
-    <GoodsList :goods="goods.pop"></GoodsList>
+      :titles="['流行', '新款', '精品']"
+      @tabClick="tabClick"></TabControl>
+    <GoodsList :goods="goods[currentType[this.indexClass]]"></GoodsList>
     <ul>
       <li>站位1</li>
       <li>站位2</li>
@@ -136,6 +137,9 @@
           new: { page: 1, list: [] },
           sell: { page: 1, list: [] },
         },
+        // 下面两个组合起来判断出不同的数据展示  pop new sell
+        currentType: ['pop', 'new', 'sell'],
+        indexClass: 0,
       }
     },
     components: {
@@ -158,6 +162,11 @@
       this.getHomeGoods('sell')
     },
     methods: {
+      // 监听儿子的点击事件（tab栏里的不同数据）
+      tabClick(index, b, c) {
+        console.log('index', index, b, c)
+        this.indexClass = index
+      },
       getHomeGoods(type) {
         let page = this.goods[type].page
         getHomeGoods(type, page).then(res => {
