@@ -111,9 +111,20 @@
 
 <script>
   import BScroll from 'Better-Scroll'
+  import axios from 'axios'
 
   export default {
     name: 'Category',
+    created() {
+      axios
+        .get('https://api.mocksys.com/api/v1/mock/20101/get/test')
+        .then(res => {
+          console.log('测试数据Mock', res)
+        })
+        .catch(err => {
+          console.log('错误~~~~', err.message)
+        })
+    },
     mounted() {
       console.log('组件挂载完毕')
       new BScroll(this.$refs.maxBox, {})
