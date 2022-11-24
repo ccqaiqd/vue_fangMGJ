@@ -3,14 +3,16 @@
     <NavBar class="center">
       <div slot="center">购物街</div>
     </NavBar>
-    <Scroll class="content">
+    <Scroll class="content" ref="scroll">
       <HomeSwiper :banners="banners" class="lunbo"></HomeSwiper>
       <RecommendView :recommends="recommends"></RecommendView>
       <FeatureView></FeatureView>
       <TabControl class="tabControl" :titles="['流行', '新款', '精品']" @tabClick="tabClick"></TabControl>
       <GoodsList :goods="goods[currentType[this.indexClass]]"></GoodsList>
     </Scroll>
-    
+    <!-- 回到顶部组件 -->
+    <!-- 非原生元素监听不起效果  要加修饰符 .native 才行 -->
+    <BackScroll  @click.native="backTop"></BackScroll>
   </div>
 </template>
 
@@ -23,6 +25,7 @@ import TabControl from '@/components/content/tabControl/TabControl'
 import GoodsList from '@/components/content/goods/GoodsList'
 import { getHomeMultidata, getHomeGoods } from '@/network/home'
 import Scroll from '@/components/common/scroll/Scroll'
+import BackScroll from '@/components/content/backScroll/BackScroll'
 
 export default {
   name: 'Home',
@@ -49,7 +52,9 @@ export default {
     TabControl,
     GoodsList,
     // 滚动插件二次封装使用
-    Scroll
+    Scroll,
+    // 回到顶部封装的组件
+    BackScroll
   },
   created() {
     getHomeMultidata().then(res => {
@@ -75,6 +80,11 @@ export default {
         this.goods[type].list.push(...res.data.list)
         this.goods[type].page += 1
       })
+    },
+    // 通过标签 ref 事先打好标签  可以调用这个scroll 组件里面的函数  使其回到顶部效果
+    backTop() {
+      console.log("top");
+      this.$refs.scroll.scrollTop(0,0)
     }
   }
 }
@@ -113,10 +123,11 @@ export default {
   /* 动态确定高度 可以使用定位  也可以用 calc() 这个c3函数来动态计算在不同屏幕下的高度 */
   position:absolute;
   /* top: 44px; */
-  top: 7px;
+  top: 0px;
   bottom: 49px;
   left: 0;
   right: 0;
 
 }
+
 </style>

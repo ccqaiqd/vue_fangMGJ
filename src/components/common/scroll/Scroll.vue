@@ -21,6 +21,12 @@ export default {
     this.scroll = new BScroll(this.$refs.wrapper,{
 
     })
+  },
+  methods:{
+    // 点击回到 x y 坐标处 （0，0 回到顶部）
+    scrollTop(x,y,time=300) {
+      this.scroll.scrollTo(x,y,time)
+    }
   }
 }
 </script>
