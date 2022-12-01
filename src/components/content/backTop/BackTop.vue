@@ -6,7 +6,7 @@
 
 <script>
 export default {
-  name:"BackScroll"
+  name:"BackTop"
 }
 </script>
 
@@ -15,7 +15,7 @@ export default {
     width: 43px;
     height: 43px;
     position: fixed;
-  right: 8px;
-  bottom: 55px;
+    right: 8px;
+    bottom: 55px;
   }
 </style>
