@@ -1,5 +1,5 @@
 <template>
-  <div class="goodsListItem">
+  <div class="goodsListItem" @click="goDetail">
     <div>
       <img
         class="test"
@@ -47,6 +47,9 @@
       },
       ingLoadOk() {
         this.$bus.$emit('imgLoadOk')
+      },
+      goDetail() {
+        this.$router.push('/detail/'+ this.goodsItem.iid)
       }
     },
   }

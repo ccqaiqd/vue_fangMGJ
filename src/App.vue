@@ -1,6 +1,9 @@
 <template>
   <div id="app">
-    <router-view></router-view>
+    <!-- 使用 Keep-alive 使内部组件保持状态 -->
+    <keep-alive>
+      <router-view></router-view>
+    </keep-alive>
     <main-tab-bar />
   </div>
 </template>

@@ -3,7 +3,8 @@
     <GoodsListItem
       v-for="(item,index) in goods.list"
       :key="index"
-      :goodsItem="item"></GoodsListItem>
+      :goodsItem="item"
+      ></GoodsListItem>
   </div>
 </template>
 
@@ -22,6 +23,7 @@
     components: {
       GoodsListItem,
     },
+    
   }
 </script>
 

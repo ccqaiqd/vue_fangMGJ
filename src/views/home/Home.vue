@@ -71,6 +71,8 @@
         // currentType: ['pop', 'new', 'sell'],
         currentType: 'pop',
         indexClass: 0,
+        // 记录滚动的Y坐标位置  页面跳转回来时  记录回到此处 
+        saveY:0
       }
     },
     components: {
@@ -110,6 +112,19 @@
       })
       // 拿到这个组件距离顶部距离 小于多少让其吸顶
       // console.log("tab2 距离顶部距离~~",this.$refs.tabControl2.$el.offsetTop);
+    },
+    // 进入组件时生命周期函数
+    activated() {
+      // 回到组件  回到离开时记录的 坐标处
+      this.$refs.scroll.scroll.scrollTo(0,this.saveY,0)
+      this.$refs.scroll.refresh()
+
+    },
+    // 离开组件时生命周期函数
+    deactivated() {
+      // 离开时记录 滚动到的区域
+      this.saveY = this.$refs.scroll.scroll.y
+      console.log("记录Y~~~",this.saveY);
     },
     methods: {
       // 监听分类组件距离顶部距离
