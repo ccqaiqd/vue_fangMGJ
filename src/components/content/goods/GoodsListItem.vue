@@ -4,7 +4,8 @@
       <img
         class="test"
         :src="goodsItem.show.img"
-        alt="" />
+        alt="" 
+        @load="ingLoadOk"/>
       <p class="aLineEllipsis">{{ goodsItem.title }}</p>
       <span style="padding-right: 25px">收藏</span>
       <span @click="collection(isCollection)">
@@ -44,6 +45,9 @@
       collection(isCollection) {
         this.isCollection = !this.isCollection
       },
+      ingLoadOk() {
+        this.$bus.$emit('imgLoadOk')
+      }
     },
   }
 </script>

@@ -57,6 +57,13 @@ export default {
     // 多次下拉刷新 下一次可以刷新 要先执行一下下面的方法
     finishPullUp() {
       this.scroll.finishPullUp()
+
+      this.scroll.refresh()
+    },
+    // 重新计算可滚动区域
+    refresh() {
+      console.log("----------------");
+      this.scroll.refresh()
     }
   }
 }

@@ -1,8 +1,8 @@
 <template>
   <div class="goodsList">
     <GoodsListItem
-      v-for="item in goods.list"
-      :key="item.show.img"
+      v-for="(item,index) in goods.list"
+      :key="index"
       :goodsItem="item"></GoodsListItem>
   </div>
 </template>
