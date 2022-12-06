@@ -124,7 +124,7 @@
     deactivated() {
       // 离开时记录 滚动到的区域
       this.saveY = this.$refs.scroll.scroll.y
-      console.log("记录Y~~~",this.saveY);
+      console.log("记录Y坐标~~~",this.saveY);
     },
     methods: {
       // 监听分类组件距离顶部距离

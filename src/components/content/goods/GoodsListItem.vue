@@ -49,7 +49,12 @@
         this.$bus.$emit('imgLoadOk')
       },
       goDetail() {
-        this.$router.push('/detail/'+ this.goodsItem.iid)
+        this.$router.push({
+          path:'/detail',
+          query: {
+            iid: this.goodsItem.iid
+          }
+        })
       }
     },
   }
