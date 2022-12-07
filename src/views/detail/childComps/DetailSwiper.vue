@@ -1,6 +1,6 @@
 <template>
 <!-- 商品详情页的顶部轮播图 -->
-  <Swiper class="">
+  <Swiper class="swiper-img-height">
     <SwiperItem v-for="(item, index) in topImages" :key="index">
       <img :src="item" alt="">
     </SwiperItem>
@@ -26,6 +26,10 @@ export default {
 }
 </script>
 
-<style>
+<style scoped>
+.seiper-img-height {
+  height: 600px;
+  overflow: hidden;
+}
 
 </style>
