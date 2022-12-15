@@ -46,9 +46,13 @@
   import { getHomeMultidata, getHomeGoods } from '@/network/home'
   import Scroll from '@/components/common/scroll/Scroll'
   import BackTop from '@/components/content/backTop/BackTop'
+  // 导入混入.js 的文件
+  import {itemListemerMixin} from '@/common/mixin'
 
   export default {
     name: 'Home',
+    // 使用混入技术
+    mixins: [itemListemerMixin],
     data() {
       return {
         // 根据 下面这个值决定 分类组件 是否显示吸顶效果
@@ -72,7 +76,9 @@
         currentType: 'pop',
         indexClass: 0,
         // 记录滚动的Y坐标位置  页面跳转回来时  记录回到此处 
-        saveY:0
+        saveY:0,
+        // 监听的函数
+        itemImgListener: null
       }
     },
     components: {
@@ -99,19 +105,7 @@
       this.getHomeGoods('sell')
     },
     mounted() {
-      // 监听孙组件里的图片是否加载完成  实时更新可滚动区域 解决BS 的滚动 bug （通过全局事件总线实现 爷孙事件通信）
-      this.$bus.$on('imgLoadOk', () => {
-        // console.log("图片加载完成");
-        // refresh() 重新计算可滚动区域
-        // 拿 refs 里的东西 最好不要从 created周期里 （可能没有创建出来还） 最好在 mounted周期里
-        // this.$refs.scroll.refresh()
-        // 防抖 2秒内只执行一次
-        // this.debounce(this.$refs.scroll.refresh,2000)
-
-        this.testDebounce()
-      })
-      // 拿到这个组件距离顶部距离 小于多少让其吸顶
-      // console.log("tab2 距离顶部距离~~",this.$refs.tabControl2.$el.offsetTop);
+      console.log("Home 页 混入测试");
     },
     // 进入组件时生命周期函数
     activated() {
@@ -125,6 +119,9 @@
       // 离开时记录 滚动到的区域
       this.saveY = this.$refs.scroll.scroll.y
       console.log("记录Y坐标~~~",this.saveY);
+      // 取消全局事件的监听
+      this.$bus.$off('imgLoadOk',this.itemImgListener)
+
     },
     methods: {
       // 监听分类组件距离顶部距离
@@ -200,16 +197,7 @@
       //   }
       // }
 
-      // 未封装的 防抖用法
-      testDebounce() {
-        // let time = null
-        if (this.time !== null) {
-          clearTimeout(this.time)
-        }
-        this.time = setTimeout(() => {
-          this.$refs.scroll.refresh()
-        }, 1000)
-      },
+      
     },
   }
 </script>

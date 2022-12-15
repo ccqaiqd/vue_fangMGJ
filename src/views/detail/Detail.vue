@@ -1,7 +1,7 @@
 <template>
   <div id="detail">
     <DetailNavBar></DetailNavBar>
-    <Scroll class="content" ref="scroll">
+    <Scroll class="content" ref="scroll" >
       <!-- 详情页顶部商品轮播图 -->
       <DetailSwiper :topImages="topImages"></DetailSwiper>
       <!-- 商品信息 价格什么的 -->
@@ -14,6 +14,8 @@
       <DetailParamInfo :paramInfo="paramInfo"></DetailParamInfo>
       <!-- 评价信息 -->
       <DetailCommentInfo :comment-info="commentInfo"></DetailCommentInfo>
+      <!-- 底部推荐瀑布流信息 -->
+      <GoodsListArray :goods="recommends"></GoodsListArray>
     </Scroll>
   </div>
 </template>
@@ -21,7 +23,7 @@
 <script>
   import DetailNavBar from '@/views/detail/childComps/DetailNavBar'
   // 不加 {} 会报错
-  import { getDetail, Goods, Shop, GoodsParam } from '@/network/detail'
+  import { getDetail, Goods, Shop, GoodsParam, getRecommend} from '@/network/detail'
   import DetailSwiper from '@/views/detail/childComps/DetailSwiper'
   import DetailBaseInfo from '@/views/detail/childComps/DetailBaseInfo'
   import DetailShopInfo from '@/views/detail/childComps/DetailShopInfo'
@@ -29,6 +31,8 @@
   import DetailGoodsInfo from '@/views/detail/childComps/DetailGoodsInfo'
    import DetailParamInfo from '@/views/detail/childComps/DetailParamInfo.vue'
    import DetailCommentInfo from '@/views/detail/childComps/DetailCommentInfo'
+   import GoodsListArray from '@/components/content/goods/GoodsListArray'
+   import {itemListemerMixin} from '@/common/mixin'
   export default {
     name: 'Detail',
     components: {
@@ -39,8 +43,11 @@
       Scroll,
       DetailGoodsInfo,
       DetailParamInfo,
-      DetailCommentInfo
+      DetailCommentInfo,
+      GoodsListArray
     },
+    // 混入 mixins
+    mixins: [itemListemerMixin],
     data() {
       return {
         iid: null,
@@ -56,6 +63,8 @@
         paramInfo: {},
         // 评价信息
         commentInfo: {},
+        // 底部推荐信息瀑布列表
+        recommends: []
 
       }
     },
@@ -82,6 +91,10 @@
 		        this.commentInfo = data.rate.list[0];
 	        }
       })
+      // 详情页底部推荐数据请求
+      getRecommend().then(res => {
+        this.recommends = res.data.list
+      })
     },
     methods: {
       // imageLoad() {
@@ -97,6 +110,12 @@
       imageLoad() {
         this.$refs.scroll.refresh()
       }
+    },
+    mounted() {
+      console.log("测试混入技术 本Detail页");
+    },
+    destroyed() {
+      this.$bus.$off('imgLoadOk',this.itemImgListener)
     }
   }
 </script>

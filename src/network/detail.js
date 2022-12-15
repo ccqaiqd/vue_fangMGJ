@@ -11,6 +11,14 @@ export function getDetail(iid) {
   })
 }
 
+// 请求详情页底部推荐瀑布流数据
+export function getRecommend() {
+	return request({
+		url: '/recommend'
+	})
+}
+
+
 // 创建一个类  整合出一个对象 保存着商品基本的信息 方便组件的传递与使用
 export class Goods {
 	constructor(itemInfo, columns, services) {

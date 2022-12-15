@@ -3,7 +3,7 @@
     <div>
       <img
         class="test"
-        :src="goodsItem.show.img"
+        :src="goodsItemImg"
         alt="" 
         @load="ingLoadOk"/>
       <p class="aLineEllipsis">{{ goodsItem.title }}</p>
@@ -41,10 +41,16 @@
         isCollection: true,
       }
     },
+    computed: {
+      goodsItemImg() {
+       return   this.goodsItem.image || this.goodsItem.show.img  //顺序反过来就报错 真奇怪 
+      }
+    },
     methods: {
       collection(isCollection) {
         this.isCollection = !this.isCollection
       },
+      // 图片加载好了 告诉父组件的  Srcoll 让其 重新计算可滚动区域
       ingLoadOk() {
         this.$bus.$emit('imgLoadOk')
       },
