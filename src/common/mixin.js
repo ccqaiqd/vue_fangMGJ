@@ -32,3 +32,24 @@ export const itemListemerMixin = {
   
 
 }
+
+// 回到顶部的小图标
+import BackTop from '@/components/content/backTop/BackTop'
+export const backTopMixin = {
+  components: {
+    BackTop
+  },
+  data() {
+    return {
+      // 是否显示 回到顶部箭头按钮
+      isDisplay: false,
+    }
+  },
+  methods: {
+    // 通过标签 ref 事先打好标签  可以调用这个scroll 组件里面的函数  使其回到顶部效果
+    backTop() {
+      // console.log("top");
+      this.$refs.scroll.scrollTop(0, 0,500)
+    },
+  }
+}

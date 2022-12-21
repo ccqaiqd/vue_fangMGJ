@@ -27,6 +27,7 @@ export default {
   methods: {
      titleClick(index) {
       this.cureeindex = index
+      this.$emit('titleClick',index,'hahah')
      },
      back() {
       this.$router.back()
