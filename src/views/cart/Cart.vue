@@ -12,6 +12,7 @@
     <!-- 商品的列表 -->
     <CartList></CartList>
     <!-- 底部汇总 -->
+    <CartBottomBar></CartBottomBar>
   </div>
 </template>
 
@@ -22,13 +23,15 @@
   // 把vuex中的计算属性直接映射过来用
   import {mapGetters} from 'vuex'
   import CartList from '@/views/cart/childComps/CartList'
+  import CartBottomBar from '@/views/cart/childComps/CartBottomBar'
   export default {
     name: 'Cart',
     components: {
       TestTow,
       TestThree,
       NavBar,
-      CartList
+      CartList,
+      CartBottomBar
     },
 
     computed: {

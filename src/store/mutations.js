@@ -7,6 +7,7 @@ export default {
 
   // 新增商品
   [ADD_TO_CART](state,payload) {
+    payload.checked = true
     state.cartList.push(payload)
   }
 }

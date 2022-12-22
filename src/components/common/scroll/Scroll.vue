@@ -62,7 +62,7 @@ export default {
     },
     // 重新计算可滚动区域
     refresh() {
-      console.log("----------------");
+      console.log("----------------hhh");
       this.scroll.refresh()
     }
   }
