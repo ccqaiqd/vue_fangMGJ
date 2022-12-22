@@ -1,11 +1,16 @@
 <template>
   <div id="detail">
     <DetailNavBar @titleClick="titleClick" ref="nav"></DetailNavBar>
+    <!-- <div>{{$store.state.cartList.length}}</div> -->
+    
     <Scroll
       class="content"
       :probeType="3"
       @positionY="contentScroll"
       ref="scroll">
+      <ul>
+        <li v-for="(item,index) in $store.state.cartList" :key="index">{{item}}</li>
+      </ul>
       <!-- 详情页顶部商品轮播图 -->
       <DetailSwiper :topImages="topImages"></DetailSwiper>
       <!-- 商品信息 价格什么的 -->
@@ -129,6 +134,8 @@
         product.price = this.goods.realPrice
         product.iid = this.iid
         console.log("点击了加入购物车~",product);
+        // this.$store.commit('addCart',product)
+        this.$store.dispatch('addCart',product)
       },
       // 监听顶部导航栏的点击（子告诉父点击了第几个 方便锚点联动跳到对应的内容区域）
       titleClick(index) {

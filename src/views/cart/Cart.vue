@@ -1,23 +1,46 @@
 <template>
   <div>
-    <TestTow></TestTow>
+    <!-- <TestTow></TestTow>
     <br />
     <br />
     <br />
-    <TestThree></TestThree>
+    <TestThree></TestThree> -->
+    <!-- 导航 -->
+    <NavBar class="navBar">
+      <div slot="center" >购物车({{cartLength}})</div>
+    </NavBar>
+    <!-- 商品的列表 -->
+    <CartList></CartList>
+    <!-- 底部汇总 -->
   </div>
 </template>
 
 <script>
   import TestTow from '@/views/test/TestTow'
   import TestThree from '@/views/test/TestThree'
+  import NavBar from '@/components/common/navbar/NavBar'
+  // 把vuex中的计算属性直接映射过来用
+  import {mapGetters} from 'vuex'
+  import CartList from '@/views/cart/childComps/CartList'
   export default {
     name: 'Cart',
     components: {
       TestTow,
       TestThree,
+      NavBar,
+      CartList
     },
+
+    computed: {
+      // 把vuex中的计算属性直接映射过来用
+      ...mapGetters(['cartLength'])
+    }
   }
 </script>
 
-<style scoped></style>
+<style scoped>
+.navBar {
+  background-color: var(--color-tint);
+  color: #fff;
+}
+</style>
