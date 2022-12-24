@@ -45,9 +45,11 @@
     methods: {
       checkBtnClick: function () {
         console.log("点击了全选~");
-        this.cartList.forEach(()=> {
-          // 改变里面每一个的选中状态
-        })
+        if(this.isSelectAll) {
+          this.cartList.forEach(item=> item.checked = false)
+        }else {
+          this.cartList.forEach(item=> item.checked = true)
+        }
       }
     }
 	}

@@ -135,7 +135,9 @@
         product.iid = this.iid
         console.log("点击了加入购物车~",product);
         // this.$store.commit('addCart',product)
-        this.$store.dispatch('addCart',product)
+        this.$store.dispatch('addCart',product).then((res)=> {
+          console.log(res);
+        })
       },
       // 监听顶部导航栏的点击（子告诉父点击了第几个 方便锚点联动跳到对应的内容区域）
       titleClick(index) {
