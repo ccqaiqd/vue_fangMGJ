@@ -34,6 +34,6 @@
     justify-content: space-around;
     width: 100vw;
     /* height: 888px; */
-    background-color: pink;
+    /* background-color: pink; */
   }
 </style>

@@ -4,6 +4,12 @@ import router from './router'
 import store from './store'
 import '@/config/lazy-load'
 import axios from 'axios'
+import VueLazyload from 'vue-lazyload'
+
+Vue.use(VueLazyload,{
+  loading:require('@/assets/img/common/placeholder.png'),
+  error:require('@/assets/img/common/placeholder.png')
+})
 
 Vue.config.productionTip = false
 Vue.prototype.$axios = axios

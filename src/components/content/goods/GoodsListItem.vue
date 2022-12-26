@@ -3,7 +3,7 @@
     <div>
       <img
         class="test"
-        :src="goodsItemImg"
+        v-lazy="goodsItemImg"
         alt="" 
         @load="ingLoadOk"/>
       <p class="aLineEllipsis">{{ goodsItem.title }}</p>
